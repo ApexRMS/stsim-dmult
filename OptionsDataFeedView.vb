@@ -66,7 +66,7 @@ Class OptionsDataFeedView
     Private Sub OnTerminologyChanged(ByVal e As DataSheetMonitorEventArgs)
 
         Dim t As String = CStr(e.GetValue(
-            "TimestepUnits", "timestep")).ToLower(CultureInfo.CurrentCulture)
+            "TimestepUnits", "timestep")).ToLower(CultureInfo.InvariantCulture)
 
         Me.LabelTimesteps.Text = t
 

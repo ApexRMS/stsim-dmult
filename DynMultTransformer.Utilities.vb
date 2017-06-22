@@ -38,10 +38,10 @@ Partial Class DynMultTransformer
         If (ContainsQuote) Then
 
             Dim s As String = value.Replace("""", """""")
-            Return String.Format(CultureInfo.CurrentCulture, """{0}""", s)
+            Return String.Format(CultureInfo.InvariantCulture, """{0}""", s)
 
         Else
-            Return String.Format(CultureInfo.CurrentCulture, """{0}""", value)
+            Return String.Format(CultureInfo.InvariantCulture, """{0}""", value)
         End If
 
     End Function

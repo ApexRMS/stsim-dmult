@@ -221,15 +221,15 @@ Class DynMultTransformer
 
             Try
                 ExternalScript.ProcessCmd(app, args)
-                '                sMsg = String.Format(CultureInfo.CurrentCulture, "Executed external script file '{0}'.", app)
+                '                sMsg = String.Format(CultureInfo.InvariantCulture, "Executed external script file '{0}'.", app)
                 '                Me.AddStatusRecord(StatusRecordType.Information, sMsg)
 
             Catch ex As System.ComponentModel.Win32Exception
-                sMsg = String.Format(CultureInfo.CurrentCulture, "Could not find external script file '{0}'.", app)
+                sMsg = String.Format(CultureInfo.InvariantCulture, "Could not find external script file '{0}'.", app)
                 Me.RecordStatus(StatusType.Warning, sMsg)
                 Exit Sub
             Catch ex As Exception
-                sMsg = String.Format(CultureInfo.CurrentCulture, "Error executing external script file '{0}'.", app)
+                sMsg = String.Format(CultureInfo.InvariantCulture, "Error executing external script file '{0}'.", app)
                 Me.RecordStatus(StatusType.Warning, sMsg)
                 Exit Sub
             End Try
@@ -248,7 +248,7 @@ Class DynMultTransformer
                     ' Check for rows and columns match
                     If rastDhsm.NumberCols <> Me.STSimTransformer.InputRasters.NumberColumns Or
                             rastDhsm.NumberRows <> Me.STSimTransformer.InputRasters.NumberRows Then
-                        sMsg = String.Format(CultureInfo.CurrentCulture, "DHSM: The number of row and/or columns of the imported Dynamic Habitat Suitability Multiplier file '{0}' did not match that expected.", dhsmFilename)
+                        sMsg = String.Format(CultureInfo.InvariantCulture, "DHSM: The number of row and/or columns of the imported Dynamic Habitat Suitability Multiplier file '{0}' did not match that expected.", dhsmFilename)
                         Me.RecordStatus(StatusType.Warning, sMsg)
                     Else
                         DynMultRasters.Add(rastDhsm, tg.TransitionGroupId.ToString(CultureInfo.InvariantCulture))
@@ -259,7 +259,7 @@ Class DynMultTransformer
             Next
 
             If DynMultRasters.Count = 0 Then
-                sMsg = String.Format(CultureInfo.CurrentCulture, "Did not find any Dynamic Habitat Suitability Multiplier raster files in '{0}'.", dhmsOutputPath)
+                sMsg = String.Format(CultureInfo.InvariantCulture, "Did not find any Dynamic Habitat Suitability Multiplier raster files in '{0}'.", dhmsOutputPath)
                 Me.RecordStatus(StatusType.Warning, sMsg)
             End If
 
@@ -285,7 +285,7 @@ Class DynMultTransformer
         End If
 
         If Not IO.File.Exists(Me.ScriptName) Then
-            Dim sMsg As String = String.Format(CultureInfo.CurrentCulture, "Dynamic Habitat Suitablity Multipliers Script '{0}' does not exist. Feature not performed.", Me.ScriptName)
+            Dim sMsg As String = String.Format(CultureInfo.InvariantCulture, "Dynamic Habitat Suitablity Multipliers Script '{0}' does not exist. Feature not performed.", Me.ScriptName)
             Me.RecordStatus(StatusType.Warning, sMsg)
             Return False
         End If

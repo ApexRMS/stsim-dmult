@@ -35,7 +35,7 @@ Module ExternalScript
         oProcess.WaitForExit() ' wait indefinitely for the process to exit
 
         If oProcess.ExitCode <> 0 Then
-            Dim sMsg = String.Format(CultureInfo.CurrentCulture, "Error executing external script '{0}'. Error Message: '{1}'", appName, sOutput)
+            Dim sMsg = String.Format(CultureInfo.InvariantCulture, "Error executing external script '{0}'. Error Message: '{1}'", appName, sOutput)
             Throw New Exception(sMsg)
         End If
 
