@@ -55,7 +55,7 @@ Partial Class DynMultTransformer
 
         For Each t As Transformer In Me.Transformers
 
-            If (t.Name = "stsim:core-transformer") Then
+            If (t.Name = "stsim:runtime") Then
                 Return CType(t, STSim.STSimTransformer)
             End If
 
