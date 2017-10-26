@@ -62,7 +62,8 @@ Partial Class DynMultTransformer
 
                 Dim AttrValue As Nullable(Of Double) =
                     Me.STSimTransformer.GetAttributeValueNoAge(
-                        stateAttrId, c.StratumId, c.SecondaryStratumId, c.StateClassId, iteration, timestep)
+                        stateAttrId, c.StratumId, c.SecondaryStratumId, c.TertiaryStratumId,
+                        c.StateClassId, iteration, timestep)
 
                 ' If no value, then use NO_DATA (initialized above), otherwise AttrValue
                 If AttrValue IsNot Nothing Then
@@ -75,7 +76,8 @@ Partial Class DynMultTransformer
             For Each c As Cell In Me.STSimTransformer.Cells
 
                 Dim AttrValue As Nullable(Of Double) = Me.STSimTransformer.GetAttributeValueByAge(
-                    stateAttrId, c.StratumId, c.SecondaryStratumId, c.StateClassId, iteration, timestep, c.Age)
+                    stateAttrId, c.StratumId, c.SecondaryStratumId, c.TertiaryStratumId,
+                    c.StateClassId, iteration, timestep, c.Age)
 
                 ' If no value, then use NO_DATA, otherwise AttrValue
                 If AttrValue IsNot Nothing Then
