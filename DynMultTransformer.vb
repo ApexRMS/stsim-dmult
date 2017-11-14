@@ -77,8 +77,6 @@ Class DynMultTransformer
 
     Public Overrides Sub Transform()
 
-        MyBase.Transform()
-
         Me.m_STSimTransformer = Me.GetSTSimTransformer()
         Me.InitializeProperties()
 
