@@ -93,8 +93,8 @@ Class DynMultTransformer
             Return
         End If
 
-        AddHandler Me.STSimTransformer.ExternalMultipliersRequested, AddressOf Me.OnSTSimExternalMultipliersRequested
-        AddHandler Me.STSimTransformer.ApplyingProbabilisticTransitionsRaster, AddressOf OnBeforeApplyProbabilisticTransitionsRaster
+        AddHandler Me.STSimTransformer.ApplyingSpatialMultipliers, AddressOf Me.OnApplyingSpatialMultipliers
+        AddHandler Me.STSimTransformer.ApplyingSpatialTransitions, AddressOf OnApplyingSpatialTransitions
 
         Me.m_HandlersAdded = True
 
@@ -116,8 +116,8 @@ Class DynMultTransformer
                     Me.RecordStatus(StatusType.Information, "Dynamic Habitat Suitablity Multipliers Timestep value greater than Maximum Timestep.")
                 End If
 
-                RemoveHandler Me.STSimTransformer.ExternalMultipliersRequested, AddressOf OnSTSimExternalMultipliersRequested
-                RemoveHandler Me.STSimTransformer.ApplyingProbabilisticTransitionsRaster, AddressOf OnBeforeApplyProbabilisticTransitionsRaster
+                RemoveHandler Me.STSimTransformer.ApplyingSpatialMultipliers, AddressOf OnApplyingSpatialMultipliers
+                RemoveHandler Me.STSimTransformer.ApplyingSpatialTransitions, AddressOf OnApplyingSpatialTransitions
 
             End If
 
@@ -133,14 +133,12 @@ Class DynMultTransformer
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub OnSTSimExternalMultipliersRequested(sender As Object, e As ExternalMultipliersEventArgs)
-
-        'Debug.Print("DHS.OnSTSimExternalMultipliersRequested:" & e.Timestep & ", CellId:" & e.CellId)
+    Private Sub OnApplyingSpatialMultipliers(sender As Object, e As MultiplierEventArgs)
 
         If Me.DynMultRasters.Contains(e.TransitionGroupId.ToString(CultureInfo.InvariantCulture)) Then
             Dim rast As StochasticTimeRaster = CType(Me.DynMultRasters.Item(e.TransitionGroupId.ToString(CultureInfo.InvariantCulture)), StochasticTimeRaster)
 
-            Dim val As Double = rast.DblCells(e.CellId)
+            Dim val As Double = rast.DblCells(e.SimulationCell.CellId)
             If Math.Abs(val - rast.NoDataValue) < Double.Epsilon Then
                 val = 1.0
             End If
@@ -152,7 +150,7 @@ Class DynMultTransformer
 
     End Sub
 
-    Private Sub OnBeforeApplyProbabilisticTransitionsRaster(sender As Object, e As ApplyProbabilisticTransitionsRasterEventArgs)
+    Private Sub OnApplyingSpatialTransitions(sender As Object, e As SpatialTransitionEventArgs)
 
         Dim sMsg As String
 
