@@ -51,49 +51,51 @@ Partial Class DynMultTransformer
     ''' <remarks></remarks>
     Private Function CreateDHSMultRasterStateAttributeOutput(ByVal iteration As Integer, ByVal timestep As Integer, stateAttrId As Integer, saFilename As String) As String
 
-        Dim rastOutput As New StochasticTimeRaster
-        ' Fetch the raster metadata from the InpRasters object
-        Me.STSimTransformer.InputRasters.GetMetadata(rastOutput)
-        rastOutput.InitDblCells()
+        Debug.Assert(False)
 
-        If Me.STSimTransformer.IsNoAgeAttributeType(stateAttrId) Then
+        'Dim rastOutput As New StochasticTimeRaster
+        '' Fetch the raster metadata from the InpRasters object
+        'Me.STSimTransformer.InputRasters.GetMetadata(rastOutput)
+        'rastOutput.InitDblCells()
 
-            For Each c As Cell In Me.STSimTransformer.Cells
+        'If Me.STSimTransformer.IsNoAgeAttributeType(stateAttrId) Then
 
-                Dim AttrValue As Nullable(Of Double) =
-                    Me.STSimTransformer.GetAttributeValueNoAge(
-                        stateAttrId, c.StratumId, c.SecondaryStratumId, c.TertiaryStratumId,
-                        c.StateClassId, iteration, timestep)
+        '    For Each c As Cell In Me.STSimTransformer.Cells
 
-                ' If no value, then use NO_DATA (initialized above), otherwise AttrValue
-                If AttrValue IsNot Nothing Then
-                    rastOutput.DblCells(c.CellId) = CDbl(AttrValue)
-                End If
-            Next
+        '        Dim AttrValue As Nullable(Of Double) =
+        '            Me.STSimTransformer.GetAttributeValueNoAge(
+        '                stateAttrId, c.StratumId, c.SecondaryStratumId, c.TertiaryStratumId,
+        '                c.StateClassId, iteration, timestep)
 
-        ElseIf Me.STSimTransformer.IsAgeAttributeType(stateAttrId) Then
+        '        ' If no value, then use NO_DATA (initialized above), otherwise AttrValue
+        '        If AttrValue IsNot Nothing Then
+        '            rastOutput.DblCells(c.CellId) = CDbl(AttrValue)
+        '        End If
+        '    Next
 
-            For Each c As Cell In Me.STSimTransformer.Cells
+        'ElseIf Me.STSimTransformer.IsAgeAttributeType(stateAttrId) Then
 
-                Dim AttrValue As Nullable(Of Double) = Me.STSimTransformer.GetAttributeValueByAge(
-                    stateAttrId, c.StratumId, c.SecondaryStratumId, c.TertiaryStratumId,
-                    c.StateClassId, iteration, timestep, c.Age)
+        '    For Each c As Cell In Me.STSimTransformer.Cells
 
-                ' If no value, then use NO_DATA, otherwise AttrValue
-                If AttrValue IsNot Nothing Then
-                    rastOutput.DblCells(c.CellId) = CDbl(AttrValue)
-                End If
-            Next
+        '        Dim AttrValue As Nullable(Of Double) = Me.STSimTransformer.GetAttributeValueByAge(
+        '            stateAttrId, c.StratumId, c.SecondaryStratumId, c.TertiaryStratumId,
+        '            c.StateClassId, iteration, timestep, c.Age)
 
-        Else
-            Debug.Assert(False, "Specified State Attributes not found in StateAttributeTypeIdsXXXAges")
-            Return ""
-        End If
+        '        ' If no value, then use NO_DATA, otherwise AttrValue
+        '        If AttrValue IsNot Nothing Then
+        '            rastOutput.DblCells(c.CellId) = CDbl(AttrValue)
+        '        End If
+        '    Next
 
-        'DEVNOTE: Use Default NODATA_Value for all spatial output raster files
-        rastOutput.NoDataValue = StochasticTimeRaster.DefaultNoDataValue
+        'Else
+        '    Debug.Assert(False, "Specified State Attributes not found in StateAttributeTypeIdsXXXAges")
+        '    Return ""
+        'End If
 
-        RasterFiles.ProcessDoubleRasterToFile(rastOutput, saFilename, RasterCompression.GetGeoTiffCompressionType(Me.Library))
+        ''DEVNOTE: Use Default NODATA_Value for all spatial output raster files
+        'rastOutput.NoDataValue = Spatial.DEFAULT_NO_DATA_VALUE
+
+        'RasterFiles.ProcessDoubleRasterToFile(rastOutput, saFilename, RasterCompression.GetGeoTiffCompressionType(Me.Library))
 
         Return saFilename
 

@@ -160,7 +160,7 @@ Class DynMultTransformer
         If Me.IsOutputTimestep(e.Timestep, Me.Frequency, True) Then
 
             Dim ds As DataSheet = Me.Scenario.GetDataSheet(DATAFEED_DHSM_NAME)
-            Dim spatialOutputPath As String = RasterFiles.GetOutputFolder(ds, True)
+            Dim spatialOutputPath As String = Spatial.GetSpatialOutputFolderName(ds, True)
 
             ' We'll use a DHSM subdirectory under spatial output for all our processing - basically a temp
             ' directory that will leave some processing clues, and is multiprocessing friendly becuase of its location
@@ -232,26 +232,31 @@ Class DynMultTransformer
 
             ' Now its time to load up the new Dynamic Habitat Suitablity Multiplication rasters created by the script
             Me.DynMultRasters.Clear()
+
             ' Loop thru transition groups
             For Each tg In Me.STSimTransformer.TransitionGroups
+
                 Debug.Print("DHSM: Importing for TransitionGroup:{0}", tg.TransitionGroupId)
                 Dim dhsmFilename As String = String.Format(CultureInfo.InvariantCulture, DHSM_DHSM_TG_FILENAME, tg.TransitionGroupId)
                 dhsmFilename = Path.Combine(dhmsOutputPath, dhsmFilename)
+
                 If IO.File.Exists(dhsmFilename) Then
-                    Dim rastDhsm As New StochasticTimeRaster
-                    RasterFiles.LoadRasterFile(dhsmFilename, rastDhsm, RasterDataType.DTDouble)
+
+                    Dim rastDhsm As New StochasticTimeRaster(dhsmFilename, RasterDataType.DTDouble)
 
                     ' Check for rows and columns match
-                    If rastDhsm.NumberCols <> Me.STSimTransformer.InputRasters.NumberColumns Or
-                            rastDhsm.NumberRows <> Me.STSimTransformer.InputRasters.NumberRows Then
+                    If rastDhsm.Width <> Me.STSimTransformer.InputRasters.Width Or
+                            rastDhsm.Height <> Me.STSimTransformer.InputRasters.Height Then
                         sMsg = String.Format(CultureInfo.InvariantCulture, "DHSM: The number of row and/or columns of the imported Dynamic Habitat Suitability Multiplier file '{0}' did not match that expected.", dhsmFilename)
                         Me.RecordStatus(StatusType.Warning, sMsg)
                     Else
                         DynMultRasters.Add(rastDhsm, tg.TransitionGroupId.ToString(CultureInfo.InvariantCulture))
                     End If
+
                 Else
                     ' We dont neccessarily expect a Dynamic Habitat Suitablity Multiplication rasters per Transition Group, so don't get exited or log anything   
                 End If
+
             Next
 
             If DynMultRasters.Count = 0 Then
@@ -317,9 +322,14 @@ Class DynMultTransformer
                          timestep.ToString("0000", CultureInfo.InvariantCulture),
                          SPATIAL_MAP_STATE_ATTRIBUTE_VARIABLE_PREFIX, attributeId)
 
-        fileName = RasterFiles.SanitizeFileName(fileName)
+        fileName = SanitizeFileName(fileName)
         Return fileName
 
+    End Function
+
+    Private Shared Function SanitizeFileName(ByVal fileName As String) As String
+        Dim invalids As Char() = System.IO.Path.GetInvalidFileNameChars()
+        Return String.Join("_", fileName.Split(invalids, StringSplitOptions.RemoveEmptyEntries)).TrimEnd()
     End Function
 
 End Class
