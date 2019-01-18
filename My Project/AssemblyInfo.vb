@@ -10,7 +10,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("SyncroSim.STSimDynMult")>
-<Assembly: AssemblyDescription("Dynamic Multipliers Module")>
+<Assembly: AssemblyDescription("Dynamic Multipliers Package")>
 <Assembly: AssemblyCompany("ApexRMS")>
 <Assembly: AssemblyProduct("SyncroSim.STSimDynMult")>
 <Assembly: AssemblyCopyright("Copyright © 2007-2018 Apex Resource Management Solution Ltd. (ApexRMS). All rights reserved.")>
