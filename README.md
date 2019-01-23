@@ -1,2 +1,2 @@
-# carep
-A SyncroSim Package for the Caribou Energy Protein Model.
+# stsim-dmult
+A SyncroSim Package for the ST-Sim Dynamic Multipliers Add-On.
