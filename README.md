@@ -1,2 +1,2 @@
 # stsim-dmult
-A SyncroSim Package for the ST-Sim Dynamic Multipliers Add-On.
+SyncroSim Add-On Package (to stsim) for generating dynamic multipliers in ST-Sim.
