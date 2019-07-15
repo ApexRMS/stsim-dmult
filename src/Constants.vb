@@ -7,11 +7,11 @@
 
 Module Constants
 
-    Public Const DATAFEED_STATE_ATTRIBUTE_TYPE_NAME As String = "STSim_StateAttributeType"
+    Public Const DATAFEED_STATE_ATTRIBUTE_TYPE_NAME As String = "stsim__StateAttributeType"
     Public Const SPATIAL_MAP_STATE_ATTRIBUTE_VARIABLE_PREFIX As String = "sa"
 
     'Dynamic Habitat Suitability Multipliers
-    Public Const DATAFEED_DHSM_NAME As String = "DM_DHSMultipliers"
+    Public Const DATAFEED_DHSM_NAME As String = "stsim_dmult__DHSMultipliers"
     Public Const DATASHEET_DHSM_ENABLED_COLUMN_NAME As String = "Enabled"
     Public Const DATASHEET_DHSM_FREQUENCY_COLUMN_NAME As String = "Frequency"
     Public Const DATASHEET_DHSM_STATE_ATTRIBUTE_TYPE_COLUMN_NAME As String = "StateAttributeTypeID"

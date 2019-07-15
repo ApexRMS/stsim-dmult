@@ -131,6 +131,7 @@
     <Compile Include="Assembly.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="DataTableUtilities.vb" />
+    <Compile Include="DBUpdate.vb" />
     <Compile Include="DynMultTransformer.Output.vb" />
     <Compile Include="DynMultTransformer.Utilities.vb" />
     <Compile Include="DynMultTransformer.vb" />
