@@ -57,7 +57,7 @@ Class OptionsDataFeedView
         End If
 
         Me.MonitorDataSheet(
-          "stsim__Terminology",
+          "stsim_Terminology",
           AddressOf Me.OnTerminologyChanged,
           True)
 

@@ -27,7 +27,7 @@ Class DBUpdate
     ''' This update renames the dynamic multiplier tables for the new namespace rules.
     ''' </remarks>
     Private Shared Sub DMULT_0000100(ByVal store As DataStore)
-        UpdateProvider.RenameTablesWithPrefix(store, "DM_", "stsim_dmult__")
+        UpdateProvider.RenameTablesWithPrefix(store, "DM_", "stsimdmult_")
     End Sub
 
 End Class

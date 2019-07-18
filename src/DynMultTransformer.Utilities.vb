@@ -55,7 +55,7 @@ Partial Class DynMultTransformer
 
         For Each t As Transformer In Me.Transformers
 
-            If (t.Name = "stsim__runtime") Then
+            If (t.Name = "stsim_Runtime") Then
                 Return CType(t, STSim.STSimTransformer)
             End If
 
@@ -89,7 +89,7 @@ Partial Class DynMultTransformer
     ''' <remarks></remarks>
     Protected Function IsSpatialRun() As Boolean
 
-        Dim drrc As DataRow = Me.Scenario.GetDataSheet("stsim__RunControl").GetDataRow()
+        Dim drrc As DataRow = Me.Scenario.GetDataSheet("stsim_RunControl").GetDataRow()
         Return DataTableUtilities.GetDataBool(drrc("IsSpatial"))
 
     End Function
