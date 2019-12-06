@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<package name="stsimdmult" displayName="Generates dynamic multipliers in ST-Sim" version="3.2.3" isAddOn="True" extendsPackage="stsim" url="https://github.com/ApexRMS/stsimdmult">
+<package name="stsimdmult" displayName="Generates dynamic multipliers in ST-Sim" version="3.2.4" isAddOn="True" extendsPackage="stsim" url="https://github.com/ApexRMS/stsimdmult">
   <transformers>
     <transformer name="Primary" displayName="Dynamic Multipliers" isPrimary="True" className="SyncroSim.STSimDynMult.DynMultTransformer" classAssembly="SyncroSim.STSimDynMult" extendsTransformer="stsim_Runtime">
       <datafeeds>
@@ -21,10 +21,14 @@
     </transformer>
   </transformers>
   <views>
-    <view name="OptionsDatafeedView" target="Options" className="SyncroSim.STSimDynMult.OptionsDataFeedView" classAssembly="SyncroSim.STSimDynMult"/>
+    <view 
+      name="OptionsDatafeedView" 
+      target="Options" 
+      className="SyncroSim.STSimDynMult.OptionsDataFeedView" 
+      classAssembly="SyncroSim.STSimDynMult"/>
   </views>
   <layouts>
-    <layout name="coreforms_ScenarioDatafeeds" appendTo="Advanced">
+    <layout name="coreforms_ScenarioDatafeeds" appendTo="stsim_Advanced">
       <item name="Options"/>
     </layout>
   </layouts>
