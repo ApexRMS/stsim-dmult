@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<package name="stsimdmult" displayName="Generates dynamic multipliers in ST-Sim" version="3.2.4" isAddOn="True" extendsPackage="stsim" url="https://github.com/ApexRMS/stsimdmult">
+<package name="stsimdmult" displayName="Generates dynamic multipliers in ST-Sim" version="3.2.5" isAddOn="True" extendsPackage="stsim" url="https://github.com/ApexRMS/stsimdmult">
   <transformers>
     <transformer name="Primary" displayName="Dynamic Multipliers" isPrimary="True" className="SyncroSim.STSimDynMult.DynMultTransformer" classAssembly="SyncroSim.STSimDynMult" extendsTransformer="stsim_Runtime">
       <datafeeds>
@@ -34,7 +34,7 @@
   </layouts>
   <updateProvider
     schemaVersion="100"
-    minPackageVersion="3.2.1"
+    minPackageVersion="3.2.5"
     className="SyncroSim.STSimDynMult.DBUpdate"
     classAssembly="SyncroSim.STSimDynMult"/>
 </package>
